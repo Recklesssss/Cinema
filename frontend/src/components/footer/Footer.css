@@ -1,0 +1,48 @@
+.footer {
+    display: flex; /* Arrange sections side by side */
+    justify-content: space-around; /* Even spacing between sections */
+    align-items: center; /* Center content vertically within the footer */
+    padding: 20px; /* Add padding around the footer */
+    background-color: #333; /* Dark gray background */
+    color: #f5f5f5; /* Light text color for contrast */
+    text-align: left; /* Align text to the left */
+    height: 300px; /* Fixed height for the footer */
+    font-family: Arial, sans-serif; /* Clean, readable font */
+}
+
+.footer h4 {
+    margin-bottom: 10px; /* Space between the title and the content */
+    font-size: 1.2rem; /* Slightly larger for section titles */
+    color: #f39c12; /* Accent color for titles */
+}
+
+.footer p, .footer ul {
+    font-size: 0.9rem; /* Readable font size */
+    line-height: 1.5; /* Proper spacing between lines */
+    margin: 0; /* Remove default margins */
+}
+
+.footer ul {
+    padding: 0; /* Remove default padding */
+    list-style: none; /* No bullet points for lists */
+}
+
+.footer ul li {
+    margin-bottom: 8px; /* Space between list items */
+}
+
+.footer a {
+    color: #f39c12; /* Accent color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.aboutUS, .howitworks, .contactus {
+    flex: 1; /* Make all sections take equal width */
+    margin: 0 10px; /* Add spacing between sections */
+    position: relative;
+    top: -55px;
+}
