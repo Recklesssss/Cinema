@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import './Room.css'
 
 function Room({ roomCode }) {
@@ -11,7 +13,7 @@ function Room({ roomCode }) {
                 <h3>Welcome to Two-Way Cinema</h3>
                 <p>{roomCode ? `Room Code: ${roomCode}` : "No Room Code Provided"}</p>
                 <button onClick={() => navigate('/')}>Create Room</button> {/* Use navigate directly */}
-                <button>Start Movie</button>
+                <Link to={'/movies'}><button>Start Movie</button></Link>
             </div>
         </div>
     );
