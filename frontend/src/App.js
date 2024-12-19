@@ -5,11 +5,20 @@ import Footer from './components/footer/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Movie from './components/movie/Movie';
 import Friends from './components/friends/Friends';
+import Signup from './components/signup/Signup';
 
 function App() {
   return (
     <div className="App">
       <Routes>
+      <Route
+          path="/signup"
+          element={
+            <>
+              <Signup/>
+            </>
+          }
+        />
       <Route
           path="/friends"
           element={
