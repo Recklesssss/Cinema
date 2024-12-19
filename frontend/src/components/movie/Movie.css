@@ -1,12 +1,10 @@
-/* General Styles */
 body {
     margin: 1;
     font-family: 'Arial', sans-serif;
-    background-color: #333; /* Primary color as background */
-    color: #fff; /* White text for contrast */
+    background-color: #333; 
+    color: #fff; 
   }
   
-  /* Movie Container */
   .movie {
     display: flex;
     flex-direction: column;
@@ -14,18 +12,17 @@ body {
   }
   
   .movie_container {
-    flex: 1; /* Ensures the content expands to fill available space */
+    flex: 1; 
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Movie Category */
   .movie_category {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #444; /* Slightly lighter than primary */
+    background-color: #444; 
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -42,7 +39,7 @@ body {
   .movie_category .sorting ul li {
     cursor: pointer;
     padding: 5px 10px;
-    color: #f39c12; /* Secondary color */
+    color: #f39c12;
     border: 1px solid #f39c12;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
@@ -50,7 +47,7 @@ body {
   
   .movie_category .sorting ul li:hover {
     background-color: #f39c12;
-    color: #333; /* Invert text color on hover */
+    color: #333; 
   }
   
   .movie_category .filter label {
@@ -67,17 +64,15 @@ body {
     color: #fff;
   }
   
-  /* Movies List */
   .movies {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
   }
   
-  /* Individual Movie Item */
   .movie_item {
-    background-color: #444; /* Slightly lighter than primary */
-    border: 1px solid #555; /* Subtle border */
+    background-color: #444; 
+    border: 1px solid #555;
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
@@ -105,10 +100,9 @@ body {
   
   .movie_item p {
     font-size: 0.9em;
-    color: #ccc; /* Slightly lighter text for descriptions */
+    color: #ccc; 
   }
   
-  /* No Movies Message */
   .movies p {
     text-align: center;
     font-size: 1.2em;

@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #f39c12;
+    --third-color: #444;
+  }
+.friends {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: var(--third-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .friends h3, .friends h4 {
+    color: var(--secondary-color);
+  }
+  
+  .friends h3 {
+    margin-bottom: 10px;
+  }
+  
+  .friends h4 {
+    margin-top: 0;
+  }
+  
+  .explore {
+    margin-top: 20px;
+  }
+  
+  .nav_friend ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    margin: 0;
+  }
+  
+  .nav_friend li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .nav_friend li:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .friend-list {
+    margin-top: 15px;
+  }
+  
+  .friend {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .friend:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  p {
+    margin: 10px 0;
+  }
+  
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
