@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import Navbar from '../navbar/Navbar';
 
 function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(true); // State to toggle between Sign In and Sign Up
@@ -16,6 +17,8 @@ function Signup() {
   };
 
   return (
+    <div className="outer_signup">
+        <Navbar/>
     <div className="auth-form">
       <h3>{isSigningIn ? 'Sign In' : 'Sign Up'}</h3>
       <p>
@@ -68,6 +71,7 @@ function Signup() {
           {isSigningIn ? 'Sign up here' : 'Sign in here'}
         </span>
       </p>
+    </div>
     </div>
   );
 }
