@@ -1,12 +1,14 @@
 const db = require('../config/database');
+const bcrypt = require('bcryptjs');
 
 // Create a new user
 exports.create = async (userData) => {
+  console.log('Received registration data:', userData);
   const { email, password, name } = userData;
   const query = `
     INSERT INTO users (email, password, name)
     VALUES ($1, $2, $3)
-    RETURNING id, email, name;
+    RETURNING user_id, email, name;
   `;
   const { rows } = await db.query(query, [email, password, name]);
   return rows[0];

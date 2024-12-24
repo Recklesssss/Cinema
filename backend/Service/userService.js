@@ -1,19 +1,19 @@
-const userModel = require('../Models/userModel');
 const bcrypt = require('bcryptjs');
+const userModel = require('../Models/userModel');
 const jwt = require('jsonwebtoken');
 
 exports.register = async (userData) => {
+  console.log('Received registration data:', userData);
   const { email, password, name } = userData;
-
   // Check if the user already exists
-  const existingUser = await userModel.findByEmail(email);
-  if (existingUser) throw new Error('Email is already registered.');
+  
 
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
+  const userData1 = { email, password: hashedPassword, name }
 
   // Create the user in the database
-  return await userModel.create({ email, password: hashedPassword, name });
+  return await userModel.create(userData1);
 };
 
 exports.login = async ({ email, password }) => {
@@ -25,8 +25,7 @@ exports.login = async ({ email, password }) => {
   if (!isMatch) throw new Error('Invalid email or password.');
 
   // Generate a JWT token
-  const token = jwt.sign({ id: 1 }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  console.log(token)
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   return token;
 };
 

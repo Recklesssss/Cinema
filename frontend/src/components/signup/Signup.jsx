@@ -1,18 +1,50 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import Navbar from '../navbar/Navbar';
+import axios from 'axios';
 
 function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(true); // State to toggle between Sign In and Sign Up
+  const [name, setName] = useState(''); // State to store the name
+  const [email, setEmail] = useState(''); // State to store the email
+  const [password, setPassword] = useState(''); // State to store the password
+  
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async () => {
+    console.log('Password:', password)
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/register', {
+        name,
+        email,
+        password,
+      });
+      console.log('Sign up successful:', response.data);
+    } catch (error) {
+      console.log(typeof password);  // Should be "string"
+      console.error('Sign up failed:', error.response ? error.response.data : error.message);
+    }
+  };
+  
+  const handleSignin = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/login', {
+        email,
+        password: password,
+      });
+      alert('Sign in successful');
+      console.log('Sign in response:', response.data);
+    } catch (error) {
+      console.error('Sign in failed:', error.response ? error.response.data : error.message);
+    }
+  };
+  
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (isSigningIn) {
-      console.log('Sign In logic here');
-      // Add Sign In logic
+      await handleSignin();
     } else {
-      console.log('Sign Up logic here');
-      // Add Sign Up logic
+      await handleSignUp();
     }
   };
 
@@ -31,6 +63,8 @@ function Signup() {
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               id="name"
               placeholder="Enter your name"
@@ -40,7 +74,9 @@ function Signup() {
         )}
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input
+          <input  
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
             placeholder="Enter your email"
@@ -50,6 +86,8 @@ function Signup() {
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
             type="password"
             id="password"
             placeholder="Enter your password"
