@@ -1,10 +1,9 @@
 const user = (state=[],action)=>{
     switch (action.type) {
-        case '':
-            
-            break;
-    
+        case 'logged':
+            return state[action.data]
         default:
-            break;
+            return state
     }
 }
+export default user

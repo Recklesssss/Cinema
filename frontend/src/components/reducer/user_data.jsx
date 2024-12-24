@@ -1,6 +1,6 @@
 const userDatas = (state = [],action)=>{
     switch (action.type) {
-        case 'logged':
+        case 'count':
             return [...state,action.data]
         default:
             return state;
