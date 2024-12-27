@@ -1,0 +1,128 @@
+.cinema {
+    display: grid;
+    grid-template-areas: 
+      "mainContainer leftContainer";
+    grid-template-columns: 3fr 1fr;
+    height: 100vh;
+    gap: 20px;
+    background-color: #333;
+    color: #f39c12;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .mainContainer {
+    grid-area: mainContainer;
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    gap: 20px;
+    background-color: #334;
+    border-radius: 10px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .videoContent {
+    background-color: #333;
+    border: 2px solid #f39c12;
+    border-radius: 10px;
+  }
+  
+  .comment {
+    background-color: #334;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .commentContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .commentHeader h2 {
+    margin: 0;
+  }
+  
+  .commentBody {
+    flex: 1;
+    overflow-y: auto;
+    margin: 10px 0;
+  }
+  
+  .commentItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .commentUser img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #f39c12;
+  }
+  
+  .commentText p {
+    margin: 0;
+  }
+  
+  .commentFooter {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .commentFooter input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #f39c12;
+    border-radius: 5px;
+    background-color: #333;
+    color: #f39c12;
+  }
+  
+  .commentFooter button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f39c12;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .commentFooter button:hover {
+    background-color: #d98a0a;
+  }
+  
+  .leftContainer {
+    grid-area: leftContainer;
+    background-color: #334;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .participantContainer {
+    margin-top: 20px;
+  }
+  
+  .participantItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .participantItem img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #f39c12;
+  }
+  
+  .participantItem h3 {
+    color: #f39c12;
+  }
+  

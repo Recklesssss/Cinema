@@ -6,11 +6,20 @@ import { Route, Routes } from 'react-router-dom';
 import Movie from './components/movie/Movie';
 import Friends from './components/friends/Friends';
 import Signup from './components/signup/Signup';
+import Cinema from './components/Cinema/Cinema';
 
 function App() {
   return (
     <div className="App">
       <Routes>
+      <Route
+          path="/cinema"
+          element={
+            <>
+              <Cinema/>
+            </>
+          }
+        />
       <Route
           path="/signup"
           element={
