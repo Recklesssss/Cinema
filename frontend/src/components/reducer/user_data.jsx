@@ -1,9 +1,18 @@
-const userDatas = (state = [],action)=>{
+const userDatas = (state = {}, action) => {
     switch (action.type) {
-        case 'count':
-            return [...state,action.data]
-        default:
-            return state;
+      case 'setUserData':
+        return {
+          ...state,
+          [action.name]: {
+            name: action.name,
+            profile: action.profile,
+          },
+        };
+  
+      default:
+        return state;
     }
-}
-export default userDatas;
+  };
+  
+  export default userDatas;
+  

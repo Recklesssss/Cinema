@@ -7,7 +7,7 @@
     gap: 20px;
     background-color: #333;
     color: #f39c12;
-    padding: 20px;
+    padding: 8px;
     box-sizing: border-box;
   }
   
@@ -16,23 +16,25 @@
     display: grid;
     grid-template-rows: 3fr 2fr;
     gap: 20px;
-    background-color: #334;
+    background-color: #222;
     border-radius: 10px;
     padding: 15px;
     box-sizing: border-box;
   }
   
   .videoContent {
-    background-color: #333;
+    background-color: #444;
     border: 2px solid #f39c12;
     border-radius: 10px;
+    height: 100%;
   }
   
   .comment {
-    background-color: #334;
+    background-color: #222;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
   
   .commentContainer {
@@ -43,18 +45,26 @@
   
   .commentHeader h2 {
     margin: 0;
+    color: #f39c12;
+    text-align: center;
   }
   
   .commentBody {
     flex: 1;
     overflow-y: auto;
     margin: 10px 0;
+    padding: 10px;
+    background-color: #111;
+    border-radius: 5px;
   }
   
   .commentItem {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
   }
   
   .commentUser img {
@@ -67,6 +77,7 @@
   
   .commentText p {
     margin: 0;
+    color: #f39c12;
   }
   
   .commentFooter {
@@ -90,6 +101,7 @@
     color: #333;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .commentFooter button:hover {
@@ -98,20 +110,33 @@
   
   .leftContainer {
     grid-area: leftContainer;
-    background-color: #334;
+    background-color: #222;
     border-radius: 10px;
     padding: 20px;
     box-sizing: border-box;
   }
   
+  .leftContainer h1 {
+    color: #f39c12;
+    text-align: center;
+  }
+  
   .participantContainer {
     margin-top: 20px;
+    padding: 10px;
+    background-color: #111;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px);
   }
   
   .participantItem {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
   }
   
   .participantItem img {
@@ -124,5 +149,5 @@
   
   .participantItem h3 {
     color: #f39c12;
-  }
-  
+    margin: 0;
+  } 
