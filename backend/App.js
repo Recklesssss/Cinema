@@ -1,19 +1,22 @@
 const express = require('express');
 const http = require('http');
-const { Server } = require('socket.io'); 
+const { Server } = require('socket.io');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const roomRoutes = require('./routes/roomRoutes');
 const cors = require('cors');
+
+const roomController = require('./controllers/chatController');
 
 dotenv.config();
 
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST' , 'DELETE', 'PUT'],
   },
 });
 
@@ -23,24 +26,27 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 
 app.use(errorHandler);
+app.use('/api/rooms', roomRoutes);
 
 io.on('connection', (socket) => {
   console.log('A user connected');
 
-  socket.on('message', (message) => {
-    console.log('Message received:', message);
+  socket.on('create-room', async ({ roomName }) => {
+    console.log(`Room creation requested: ${roomName}`);
 
-    io.emit('message', message);
-  }); 
+    // Call the controller to create the room
+    const { success, roomId, message } = await roomController.createRoom(
+      roomName,
+      socket.id // Use the socket ID as the creator ID
+    );
 
-  socket.on('create-room', ({ roomName }) => {
-     
-    console.log(`Room created: ${roomName} with ID: ${roomId}`);
-
-    createRoom(roomId, { roomName, creatorId: socket.id });
-
-    socket.join(roomId);
-    socket.emit('room-created', roomId);
+    if (success) {
+      socket.join(roomId); // Add the user to the created room
+      socket.emit('room-created', roomId); // Inform the user of room creation
+      console.log(`Room created: ${roomName} with ID: ${roomId}`);
+    } else {
+      socket.emit('error', message); // Send an error message if creation fails
+    }
   });
 
   socket.on('disconnect', () => {

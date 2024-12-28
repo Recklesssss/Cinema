@@ -1,7 +1,7 @@
 import React ,{useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import io, { Socket } from 'socket.io-client';
+import io,{Socket} from 'socket.io-client';
 import './Room.css'
 import { useSelector } from 'react-redux';
 
