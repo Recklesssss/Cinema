@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import './Signup.css';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
-import {setUserData} from '../actions/setUserData';
 
 function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(true); // State to toggle between Sign In and Sign Up
@@ -12,7 +11,6 @@ function Signup() {
   const [password, setPassword] = useState(''); // State to store the password
   const dispatch = useDispatch();
 
-  dispatch(setUserData(name, 'https://example.com/profile.jpg')); // Correct usage of the action creator
 
   const handleSignUp = async () => {
     console.log('Password:', password)
@@ -27,7 +25,7 @@ function Signup() {
       console.log(typeof password);  // Should be "string"
       console.error('Sign up failed:', error.response ? error.response.data : error.message);
     }
-  };
+  }; 
   
   const handleSignin = async () => {
     try {

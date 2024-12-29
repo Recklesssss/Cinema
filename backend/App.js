@@ -1,14 +1,13 @@
+const dotenv = require('dotenv');
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorHandler');
 const roomRoutes = require('./Routes/roomRoutes');
 const movieRoutes = require('./Routes/movieRoutes');
 const cors = require('cors');
-
-const roomController = require('./controllers/chatController');
 
 dotenv.config();
 
@@ -23,12 +22,14 @@ const io = new Server(server, {
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
+app.use('/api/movies', movieRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/rooms', roomRoutes);
+
 
 app.use(errorHandler);
-app.use('/api/rooms', roomRoutes);
-app.use('/api/movies', movieRoutes);
 
 io.on('connection', (socket) => {
   console.log('A user connected');
