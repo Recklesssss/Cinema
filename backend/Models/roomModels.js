@@ -5,9 +5,9 @@ exports.createRoom = async ( roomName, creatorId ) => {
     , [roomName, creatorId]);
     return room;
 }
-exports.joinroom = async (roomId, userId) => {
-  const room = await db(`INSERT INTO room_users (room_id, user_id) VALUES ($1, $2) RETURNING *`
-    , [roomId, userId]);
+exports.joinroom = async (userId) => {
+  const room = await db(`INSERT INTO rooms( participant) VALUES ($1) RETURNING *`
+    , [ userId]);
     return room;
 }
 exports.deleteRoom = async (roomId) => {

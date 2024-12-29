@@ -5,7 +5,7 @@ exports.createRoom = async (roomName, creatorId) => {
 };
 
 exports.joinRoom = async (roomId, userId) => {
-  return await roomModel.joinRoom(roomId, userId);
+  return await roomModel.joinroom(roomId, userId);
 };
 
 exports.deleteRoom = async (roomId) => {

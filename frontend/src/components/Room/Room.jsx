@@ -1,27 +1,27 @@
 import React ,{useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import io,{Socket} from 'socket.io-client';
+// import io from 'socket.io-client';
 import './Room.css'
 import { useSelector } from 'react-redux';
 
-const socket = io('http://localhost:5000', {
-    query: { name: 'JohnDoe', profilePicture: 'https://example.com/profile.jpg' },
-  }); // Connect to the backend
+// const socket = io('http://localhost:5000', {
+//     query: { name: 'JohnDoe', profilePicture: 'https://example.com/profile.jpg' },
+//   }); // Connect to the backend
 function Room({ roomCode }) {
 
-    useEffect(() => {
-        socket.emit('create-room', { roomName: 'My Room' });
+    // useEffect(() => {
+    //     socket.emit('create-room', { roomName: 'My Room' });
     
-    // Listen for confirmation
-    socket.on('room-created', (roomId) => {
-      console.log(`Room created with ID: ${roomId}`);
-      // Redirect to the room or perform other actions
-    });
-        return () => {
-          socket.off('create-room');
-        }
-      }, [])
+    // // Listen for confirmation
+    // socket.on('room-created', (roomId) => {
+    //   console.log(`Room created with ID: ${roomId}`);
+    //   // Redirect to the room or perform other actions
+    // });
+    //     return () => {
+    //       socket.off('create-room');
+    //     }
+    //   }, [])
     const navigate = useNavigate(); // Correct usage of the hook
 
     return (

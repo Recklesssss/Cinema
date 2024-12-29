@@ -22,4 +22,23 @@ router.post('/join', async (req, res) => {
   }
 });
 
+router.delete('/delete', async (req, res) => {
+  const { roomId } = req.body;
+  const result = await roomController.deleteRoom(roomId);
+  if (result.success) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(500).json({ success: false, message: result.message });
+  }
+});
+router.delete('/kick', async (req, res) => {
+  const { roomId, userId } = req.body;
+  const result = await roomController.kickUser(roomId, userId);
+  if (result.success) {
+    res.status(200).json({ success: true, room: result.room });
+  } else {
+    res.status(500).json({ success: false, message: result.message });
+  }
+});
+
 module.exports = router;

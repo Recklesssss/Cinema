@@ -7,7 +7,7 @@ const socket = io('http://localhost:5000', {
     query: { name: 'JohnDoe', profilePicture: 'https://example.com/profile.jpg' },
   }); // Connect to the backend
 
-function Cinema() {
+function Cinema() {  
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
 
@@ -20,21 +20,7 @@ function Cinema() {
     return () => {
       socket.off('message');
     };
-  }, []);  
-
-  useEffect(() => {
-    socket.emit('create-room', { roomName: 'My Room' });
-
-// Listen for confirmation
-socket.on('room-created', (roomId) => {
-  console.log(`Room created with ID: ${roomId}`);
-  // Redirect to the room or perform other actions
-});
-  
-    return () => {
-      socket.off('create-room');
-    }
-  }, [])
+  }, []);   
   
 
   const sendMessage = () => {
