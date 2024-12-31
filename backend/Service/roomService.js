@@ -1,7 +1,7 @@
 const roomModel = require('../Models/roomModels');
 
-exports.createRoom = async (roomName, creatorId) => {
-  return await roomModel.createRoom(roomName, creatorId);
+exports.createRoom = async (roomName, creatorId, movieId) => {
+  return await roomModel.createRoom(roomName, creatorId, movieId);
 };
 
 exports.joinRoom = async (roomId, userId) => {

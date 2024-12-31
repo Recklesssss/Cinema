@@ -14,12 +14,18 @@ function Room({ roomCode }) {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [movieId, setMovieId] = useState(null); // For editing movies
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getMovies();
   }, []);
+
+const handelGetId = (id) => {
+    setMovieId(id);
+    console.log(movieId)
+}
 
   const getMovies = async () => {
     setLoading(true);
@@ -68,6 +74,7 @@ function Room({ roomCode }) {
                   key={movie.movie_id}
                   movie={movie}
                   selectMovie={handleMovieSelect}
+                  handelGetId={handelGetId}
                 />
               ))
             )}

@@ -3,8 +3,8 @@ const router = express.Router();
 const roomController = require('../controllers/chatController');
 
 router.post('/create', async (req, res) => {
-  const { roomName, creatorId } = req.body;
-  const result = await roomController.createRoom(roomName, creatorId);
+  const { roomName, creatorId, movieId } = req.body;
+  const result = await roomController.createRoom(roomName, creatorId, movieId);
   if (result.success) {
     res.status(201).json({ success: true, roomId: result.roomId });
   } else {

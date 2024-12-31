@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import './Signup.css';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import setUserData from '../actions/setUserData'
+import { useSelector } from 'react-redux';
 
 function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(true); // State to toggle between Sign In and Sign Up
@@ -11,8 +13,11 @@ function Signup() {
   const [password, setPassword] = useState(''); // State to store the password
   const dispatch = useDispatch();
 
+  const friends = useSelector((state) => state.userDatas);
+console.log(friends);
 
   const handleSignUp = async () => {
+    
     console.log('Password:', password)
     try {
       const response = await axios.post('http://localhost:5000/api/users/register', {
@@ -21,6 +26,7 @@ function Signup() {
         password,
       });
       console.log('Sign up successful:', response.data);
+      dispatch(setUserData(response.data.name,null,response.data.user_id) )
     } catch (error) {
       console.log(typeof password);  // Should be "string"
       console.error('Sign up failed:', error.response ? error.response.data : error.message);

@@ -1,8 +1,8 @@
 const db = require('../config/database');
 
-exports.createRoom = async ( roomName, creatorId ) => {
-  const room = await db(`INSERT INTO rooms (room_name, creator_id) VALUES ($1, $2) RETURNING *`
-    , [roomName, creatorId]);
+exports.createRoom = async ( roomName, creatorId ,movieId ) => {
+  const room = await db(`INSERT INTO rooms (room_name, creator_id, movie_id) VALUES ($1, $2, $3) RETURNING *`
+    , [roomName, creatorId ,movieId]);
     return room;
 }
 exports.joinroom = async (userId) => {

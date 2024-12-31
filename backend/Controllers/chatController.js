@@ -3,7 +3,7 @@ const roomService = require('../Service/roomService');
 exports.createRoom = async (roomName, creatorId) => {
   try {
     // Call the service to create a room
-    const room = await roomService.createRoom(roomName, creatorId);
+    const room = await roomService.createRoom(roomName, creatorId, movieId);
     return { success: true, roomId: room.room_id };
   } catch (error) {
     console.error('Error creating room:', error.message);
