@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import SearchBar from './SearchBar';
 import MovieCard from './MovieCard';
 import SelectedMovie from './SelectedMovie';
 import UploadMovieModal from './UploadmovieModal';
 import './Room.css';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 function Room({ roomCode }) {
   const [movies, setMovies] = useState([]);
@@ -15,12 +17,31 @@ function Room({ roomCode }) {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [movieId, setMovieId] = useState(null); // For editing movies
+  const [roomName,setRoomName] = useState("")
+  const [roomId,setRoomId] = useState(0)
+  const [demo,setDemo] = useState([])
 
   const navigate = useNavigate();
+
+const friends = useSelector((state) => state.userDatas.userId);
+console.log(roomId)    
+console.log(friends)
 
   useEffect(() => {
     getMovies();
   }, []);
+
+
+const handelRoomCreatioin = async () => {
+  const result = await axios.post('http://localhost:5000/api/rooms/create', {
+    roomName: roomName,
+    creatorId: 9,
+    movieId: movieId
+  })
+  setRoomId(result.data.roomId)
+  setDemo(result)
+  navigate(`/cinema?room_id=${result.data.roomId}&movie_id=${movieId}`);
+}
 
 const handelGetId = (id) => {
     setMovieId(id);
@@ -62,6 +83,8 @@ const handelGetId = (id) => {
 
         {/* Movie Selection */}
         <div className="movie-selection">
+          <label>name of the room</label>
+          <input type="text" onChange={(e)=>setRoomName(e.target.value)} />
           <h4>Available Movies</h4>
           <div className="movie-list">
             {loading ? (
@@ -86,6 +109,7 @@ const handelGetId = (id) => {
           <SelectedMovie
             movie={selectedMovie}
             clearSelection={handleMovieRemove}
+            handelRoomCreatioin = {handelRoomCreatioin}
           />
         )}
 

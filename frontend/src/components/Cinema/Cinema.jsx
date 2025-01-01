@@ -2,6 +2,8 @@ import React, { useState, useEffect, use } from 'react';
 import './Cinema.css';
 import Navbar from '../navbar/Navbar';
 import io, { Socket } from 'socket.io-client';
+import { useSearchParams } from 'react-router-dom';
+
 
 const socket = io('http://localhost:5000', {
     query: { name: 'JohnDoe', profilePicture: 'https://example.com/profile.jpg' },
@@ -10,6 +12,16 @@ const socket = io('http://localhost:5000', {
 function Cinema() {  
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
+  const [roomCode, setRoomCode] = useState('');
+  const [movieId, setMovieId] = useState('');
+
+  const roomId = useSearchParams().get('roomId');
+  const movieId1 = useSearchParams().get('movieId');
+
+  useEffect(() => {
+    setRoomCode(roomId);
+    setMovieId(movieId1);
+  }, [roomId, movieId1]);
 
   // Listen for incoming messages
   useEffect(() => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const roomController = require('../controllers/chatController');
+const roomController = require('../Controllers/chatController');
 
 router.post('/create', async (req, res) => {
   const { roomName, creatorId, movieId } = req.body;
