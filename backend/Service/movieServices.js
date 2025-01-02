@@ -11,7 +11,7 @@ exports.uploadmovie = async (movieName, description, uploader, genre, movie) => 
     const result = await movieModel.uploadmovie(movieName, description, uploader, genre, movie);
     return result;
 }
-exports.findMovie = async (movieName) =>{
-    const movie = await movieModel.findMovie(movieName);
+exports.findMovie = async ( movieId) =>{
+    const movie = await movieModel.findMovie(movieId);
     return movie;
 }

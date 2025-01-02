@@ -10,7 +10,7 @@ exports.uploadmovie = async (movieName,description,uploader,genre,movie) => {
     , [movieName, movie, description, uploader, genre]);
     return movies;
 }
-exports.findMovie = async (moviename) => {
-    const movie = await db.query(`SELECT * FROM movies WHERE movie_name = $1`, [moviename]);
+exports.findMovie = async (movieId) => {
+    const movie = await db.query(`SELECT * FROM movies WHERE movie_id = $1`, [movieId]);
     return movie;
 }

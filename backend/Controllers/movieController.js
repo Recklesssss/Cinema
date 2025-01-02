@@ -24,8 +24,8 @@ exports.uploadmovies = async (req, res) => {
   }
 }
 exports.findMovie = async (req, res) => {
-  const { movieName } = req.params;
-  const movie = await movieService.findMovie(movieName);
+  const { movieId } = req.params;
+  const movie = await movieService.findMovie(movieId);
   if (movie) {
       res.status(200).json(movie);
   } else {

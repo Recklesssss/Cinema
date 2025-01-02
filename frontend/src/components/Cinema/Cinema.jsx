@@ -13,15 +13,17 @@ function Cinema() {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
   const [roomCode, setRoomCode] = useState('');
-  const [movieId, setMovieId] = useState('');
+  const [movieId, setMovieId] = useState(''); 
+  const [searchParams] = useSearchParams();
+  const [movie, setMovie] = useState([]);
 
-  const roomId = useSearchParams().get('roomId');
-  const movieId1 = useSearchParams().get('movieId');
+  const roomId = searchParams.get('room_id');
+  const movieId1 = searchParams.get('movie_id');
 
   useEffect(() => {
     setRoomCode(roomId);
     setMovieId(movieId1);
-  }, [roomId, movieId1]);
+  }, [roomId, movieId1]); 
 
   // Listen for incoming messages
   useEffect(() => {
@@ -34,6 +36,20 @@ function Cinema() {
     };
   }, []);   
   
+  const handelFetchMovie = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/movies/movie/${movieId1}`);
+      const data = await response.json();
+      setMovie(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+useEffect(() => {
+  handelFetchMovie();
+},[]);
 
   const sendMessage = () => {
     if (messageInput.trim() !== '') {
