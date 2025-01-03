@@ -6,6 +6,6 @@ const authMiddleware = require('../Middleware/authMiddleware');
 // Define routes
 router.post('/register', userController.registerUser); // Public route for user registration
 router.post('/login', userController.loginUser);       // Public route for user login
-router.get('/profile', authMiddleware, userController.getUserProfile); // Protected route for user profile
+router.get('/profile/:id', userController.getUserProfile); // Protected route for user profile
 
 module.exports = router;

@@ -19,8 +19,9 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.getUserProfile = async (req, res) => {
+  const { id } = req.params;  
   try {
-    const user = await userService.getProfile(req.user.id);  // Accessing user from JWT payload
+    const user = await userService.getProfile(id);  // Accessing user from JWT payload
     res.status(200).json(user);  // Respond with the user's profile
   } catch (error) {
     res.status(404).json({ error: error.message });

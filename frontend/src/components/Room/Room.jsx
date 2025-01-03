@@ -24,8 +24,6 @@ function Room({ roomCode }) {
   const navigate = useNavigate();
 
 const friends = useSelector((state) => state.userDatas.userId);
-console.log(roomId)    
-console.log(friends)
 
   useEffect(() => {
     getMovies();
@@ -35,7 +33,7 @@ console.log(friends)
 const handelRoomCreatioin = async () => {
   const result = await axios.post('http://localhost:5000/api/rooms/create', {
     roomName: roomName,
-    creatorId: 9,
+    creatorId: friends,
     movieId: movieId
   })
   setRoomId(result.data.roomId)
@@ -45,7 +43,6 @@ const handelRoomCreatioin = async () => {
 
 const handelGetId = (id) => {
     setMovieId(id);
-    console.log(movieId)
 }
 
   const getMovies = async () => {
