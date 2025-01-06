@@ -1,7 +1,7 @@
 import React, { useState, useEffect, use } from 'react';
 import './Cinema.css';
 import Navbar from '../navbar/Navbar';
-import io, { Socket } from 'socket.io-client';
+import io from 'socket.io-client';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux'; 
 
