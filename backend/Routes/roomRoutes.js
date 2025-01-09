@@ -13,8 +13,8 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/join', async (req, res) => {
-  const { roomId, userId } = req.body;
-  const result = await roomController.joinRoom(roomId, userId);
+  const {userId, roomId } = req.body;
+  const result = await roomController.joinRoom(userId, roomId);
   if (result.success) {
     res.status(200).json({ success: true, room: result.room });
   } else {

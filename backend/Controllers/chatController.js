@@ -11,10 +11,10 @@ exports.createRoom = async (roomName, creatorId,movieId) => {
     return { success: false, message: error.message };
   }
 };
-exports.joinRoom = async (roomId, userId) => {
+exports.joinRoom = async ( userId, roomId) => {
   try {
     // Call the service to join a room
-    const room = await roomService.joinRoom(roomId, userId);
+    const room = await roomService.joinRoom( userId, roomId); 
     return { success: true, room: room };
   } catch (error) {
     console.error('Error joining room:', error.message);

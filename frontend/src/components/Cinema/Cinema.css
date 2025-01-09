@@ -151,3 +151,14 @@
     color: #f39c12;
     margin: 0;
   } 
+  .muteButton{
+    background-color: #222;
+    border-style: none;
+    position: relative;
+  }
+  .onbutton{
+    background-color: #222;
+    border-style: none;
+    position: relative;
+    right: 28px;
+  }

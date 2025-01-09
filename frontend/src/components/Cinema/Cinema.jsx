@@ -4,6 +4,9 @@ import Navbar from '../navbar/Navbar';
 import io from 'socket.io-client';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux'; 
+import ReactPlayer from "react-player";
+import Participant from './participant';
+import axios from 'axios';
 
 
 const socket = io('http://localhost:5000'); // Connect to the backend
@@ -16,10 +19,39 @@ function Cinema() {
   const [searchParams] = useSearchParams();
   const [movie, setMovie] = useState([]);
   const [datas, setDatas] = useState([]);
+  // const playerRef = useRef(0);
+  const [movieUrl, setMovieUrl] = useState('');
+  const [participant, setParticipant] = useState([]);
+
+  useEffect(() => {
+    // For testing, we use the local sample video URL
+    setMovieUrl('http://localhost:5000/uploads/Wootly(60).mp4');
+  }, []);
 
   const sender = useSelector((state) => state.userDatas.userId);
   const roomId = searchParams.get('room_id');
   const movieId1 = searchParams.get('movie_id');
+  
+  useEffect(() => {
+    const fetchParticipant = async () => {
+      if (roomId) {
+        socket.emit('joinRoom', roomId);
+        try {
+          const result = await axios.post('http://localhost:5000/api/rooms/join', {
+            userId: sender,
+            roomId: roomId,
+          });
+          setParticipant(result.data.room.participant);
+          console.log(participant)
+        } catch (error) {
+          console.error('Error joining room:', error.message);
+        }
+      }
+    };
+    fetchParticipant();
+  }, [roomId]);
+  
+  
 
   useEffect(() => {
     setRoomCode(roomId);
@@ -119,15 +151,7 @@ const getUserData = async () => {
             </div>
           </div>
         </div>
-        <div className="leftContainer">
-          <h1>Participant</h1>
-          <div className="participantContainer">
-            <div className="participantItem">
-              <img src="" alt="" />
-              <h3>Username</h3>
-            </div>
-          </div>
-        </div>
+        <Participant/> 
       </div>
     </div>
   );
