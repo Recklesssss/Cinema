@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Cinema.css';
 import Navbar from '../navbar/Navbar';
 import io from 'socket.io-client';
@@ -9,19 +9,28 @@ import Participant from './participant';
 import axios from 'axios';
 
 
-const socket = io('http://localhost:5000'); // Connect to the backend
+const socket = io('http://localhost:5000',{debug:true},{
+  reconnection: true,        // Enables reconnection
+  reconnectionAttempts: 190,   // Max reconnection attempts
+  reconnectionDelay: 1000,   // Initial delay in ms
+  reconnectionDelayMax: 5000 // Max delay between attempts
+},{
+  transports: ['websocket', 'polling'],
+  withCredentials:true
+}); // Connect to the backend
 
 function Cinema() {  
   const [messages, setMessages] = useState([]);
   const [message, setMessageInput] = useState('');
   const [roomCode, setRoomCode] = useState('');
   const [movieId, setMovieId] = useState(''); 
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams(); 
   const [movie, setMovie] = useState([]);
   const [datas, setDatas] = useState([]);
-  // const playerRef = useRef(0);
+  const playerRef = useRef(0);
   const [movieUrl, setMovieUrl] = useState('');
   const [participant, setParticipant] = useState([]);
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     // For testing, we use the local sample video URL
@@ -33,23 +42,21 @@ function Cinema() {
   const movieId1 = searchParams.get('movie_id');
   
   useEffect(() => {
-    const fetchParticipant = async () => {
-      if (roomId) {
-        socket.emit('joinRoom', roomId);
-        try {
-          const result = await axios.post('http://localhost:5000/api/rooms/join', {
-            userId: sender,
-            roomId: roomId,
-          });
-          setParticipant(result.data.room.participant);
-          console.log(participant)
-        } catch (error) {
+    if (roomId) {
+      socket.emit('joinRoom', roomId); // Emit join event only once
+  
+      axios.post('http://localhost:5000/api/rooms/join', { userId: sender, roomId })
+        .then((response) => {
+          setParticipant(response.data.room.participant);
+        })
+        .catch((error) => {
           console.error('Error joining room:', error.message);
-        }
-      }
-    };
-    fetchParticipant();
-  }, [roomId]);
+        });
+    }
+  
+    
+  }, [roomId, sender]); // Ensure dependencies are accurate
+  
   
   
 
@@ -59,29 +66,26 @@ function Cinema() {
   }, [roomId, movieId1]); 
 
   // Listen for incoming messages
-  useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    return () => {
-      socket.off('message');
-    };
-  }, []);   
+    
   
   const handelFetchMessages = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/chat/messages/${roomId}`);
       const data = await response.json();
       setMessages(data);
+      if(messages.length > 0) {
+        setSent(sent => !sent);
+      }
     } catch (error) {
       console.log(error);
     }
   }
 useEffect(() => {
   getUserData();
-  handelFetchMessages();
-},[messages]);
+  if(roomId) {
+    handelFetchMessages();
+  }; 
+},[message,sent]);
   const handelFetchMovie = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/movies/movie/${movieId1}`);
@@ -138,7 +142,7 @@ const getUserData = async () => {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> 
               <div className="commentFooter">
                 <input
                   type="text"
